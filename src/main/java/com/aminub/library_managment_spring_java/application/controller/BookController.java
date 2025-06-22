@@ -4,6 +4,8 @@ import com.aminub.library_managment_spring_java.application.service.BookService;
 import com.aminub.library_managment_spring_java.domain.model.Book;
 import com.aminub.library_managment_spring_java.domain.service.IBookService;
 import lombok.extern.slf4j.XSlf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +15,11 @@ import java.util.UUID;
 @RequestMapping("/v1/api/book")
 public class BookController {
 
-    private final IBookService iBookService;
+    private static final Logger log = LoggerFactory.getLogger(BookController.class);
+    private final IBookService bookService;
 
     public BookController(IBookService iBookService) {
-        this.iBookService = iBookService;
+        this.bookService = iBookService;
     }
 
     /**
@@ -27,9 +30,23 @@ public class BookController {
      */
     @GetMapping("/{Id}")
     public ResponseEntity<Book> getBook(
-            @PathVariable String Id){
-        System.out.println("call getBook method");
-        return ResponseEntity.ok(iBookService.FindBookById(UUID.fromString(Id)));
+            @PathVariable UUID Id){
+        log.info("Retreive book with Id : {}",Id);
+        return ResponseEntity.ok(bookService.FindBookById(Id));
+    }
+
+    /**
+     *
+     * @param book
+     * @return
+     */
+    @PostMapping
+    public ResponseEntity<Book> addBook(
+            @RequestBody Book book
+    ){
+        log.info("Adding new book with Id : {}",book);
+        Book savedBook = bookService.save(book);
+        return ResponseEntity.ok(savedBook);
     }
 
 }

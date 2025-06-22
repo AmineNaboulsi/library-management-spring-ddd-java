@@ -22,4 +22,9 @@ public class BookService implements IBookService {
         return bookRepository.findById(Id)
                 .orElseThrow(() -> new IllegalArgumentException("Book not found"));
     }
+
+    @Override
+    public Book save(Book book) {
+        return bookRepository.save(book);
+    }
 }
