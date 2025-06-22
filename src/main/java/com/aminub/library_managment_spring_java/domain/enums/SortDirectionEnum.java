@@ -1,4 +1,4 @@
-package com.aminub.library_managment_spring_java.domain;
+package com.aminub.library_managment_spring_java.domain.enums;
 
 import org.springframework.data.domain.Sort;
 

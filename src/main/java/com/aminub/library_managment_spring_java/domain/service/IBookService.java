@@ -1,6 +1,7 @@
 package com.aminub.library_managment_spring_java.domain.service;
 
 import com.aminub.library_managment_spring_java.application.pyload.pagination.PageRequest;
+import com.aminub.library_managment_spring_java.application.pyload.pagination.PagedResult;
 import com.aminub.library_managment_spring_java.domain.model.Book;
 import com.aminub.library_managment_spring_java.infractructure.dto.BookFilter;
 import org.springframework.data.domain.Page;
@@ -31,5 +32,5 @@ public interface IBookService {
      * @param filterPageRequest
      * @return
      */
-    Page<Book> search(PageRequest<BookFilter> filterPageRequest);
+    PagedResult<Page<Book>> search(PageRequest<BookFilter> filterPageRequest);
 }

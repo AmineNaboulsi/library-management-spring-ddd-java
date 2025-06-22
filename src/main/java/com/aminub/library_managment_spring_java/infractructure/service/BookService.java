@@ -1,12 +1,16 @@
 package com.aminub.library_managment_spring_java.infractructure.service;
 
 import com.aminub.library_managment_spring_java.application.pyload.pagination.PageRequest;
+import com.aminub.library_managment_spring_java.application.pyload.pagination.PagedResult;
+import com.aminub.library_managment_spring_java.domain.enums.SortDirectionEnum;
 import com.aminub.library_managment_spring_java.domain.model.Book;
 import com.aminub.library_managment_spring_java.domain.repository.BookRepository;
 import com.aminub.library_managment_spring_java.domain.service.IBookService;
 import com.aminub.library_managment_spring_java.infractructure.dto.BookFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -32,9 +36,16 @@ public class BookService implements IBookService {
     }
 
     @Override
-    public Page<Book> search(PageRequest<BookFilter> filter) {
-        PageRequest<BookFilter> aa = new PageRequest<BookFilter>();
-        bookRepository.findAll();
-        return null;
+    public PagedResult<Page<Book>> search(PageRequest<BookFilter> filter) {
+        int page = filter.getPage();
+        int size = filter.getSize();
+        Sort.Direction springDirection = filter.getSortDirection().toSpringDirection();
+        Pageable pageable = org.springframework.data.domain.PageRequest.of(page, size, springDirection);
+        Page<Book> books = bookRepository.findAll(pageable);
+        PagedResult<Page<Book>> pagedResult = new PagedResult<>();
+        pagedResult.setPage(page);
+        pagedResult.setSize(size);
+        pagedResult.setEntities(books);
+        return pagedResult;
     }
 }

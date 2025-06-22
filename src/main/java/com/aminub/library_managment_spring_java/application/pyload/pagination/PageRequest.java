@@ -1,6 +1,6 @@
 package com.aminub.library_managment_spring_java.application.pyload.pagination;
 
-import com.aminub.library_managment_spring_java.domain.SortDirectionEnum;
+import com.aminub.library_managment_spring_java.domain.enums.SortDirectionEnum;
 import lombok.Data;
 import org.hibernate.query.SortDirection;
 
@@ -12,6 +12,6 @@ import org.hibernate.query.SortDirection;
 public class PageRequest<T> {
     private int page ;
     private int size ;
-    private SortDirection sortDirection;
+    private SortDirectionEnum sortDirection;
     private T filter ;
 }

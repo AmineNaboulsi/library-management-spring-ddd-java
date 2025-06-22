@@ -1,6 +1,7 @@
 package com.aminub.library_managment_spring_java.infractructure.controller;
 
 import com.aminub.library_managment_spring_java.application.pyload.pagination.PageRequest;
+import com.aminub.library_managment_spring_java.application.pyload.pagination.PagedResult;
 import com.aminub.library_managment_spring_java.domain.model.Book;
 import com.aminub.library_managment_spring_java.domain.service.IBookService;
 import com.aminub.library_managment_spring_java.infractructure.dto.BookFilter;
@@ -57,7 +58,7 @@ public class BookController {
      * @return
      */
     @PostMapping("/search")
-    public ResponseEntity<Page<Book>> deleteBook(
+    public ResponseEntity<PagedResult<Page<Book>>> deleteBook(
         @RequestBody PageRequest<BookFilter> filterPageRequest
     ){
         return ResponseEntity.ok(bookService.search(filterPageRequest));
