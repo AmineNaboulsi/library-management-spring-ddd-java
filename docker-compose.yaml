@@ -9,5 +9,15 @@ services:
       - "5438:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+  cassandra:
+      image: cassandra:4.1
+      ports:
+        - "9042:9042"
+      volumes:
+        - cassandra_data:/var/lib/cassandra
+      environment:
+        - CASSANDRA_CLUSTER_NAME=LibraryCluster
 volumes:
   postgres_data:
+  cassandra_data:
+

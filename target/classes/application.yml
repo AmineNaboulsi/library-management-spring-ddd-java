@@ -2,3 +2,12 @@ spring:
   docker:
     compose:
       enabled: false
+  cassandra:
+    keyspace-name: library_management
+    contact-points: localhost
+    port: 9042
+    local-datacenter: datacenter1
+    username: cassandra
+    password: cassandra
+    schema-action: create_if_not_exists
+
